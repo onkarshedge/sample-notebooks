@@ -1,0 +1,137 @@
+{
+  "paragraphs": [
+    {
+      "text": "val schoolText \u003d sc.textFile(\"/home/onkar/DRIVE(C)/zeppelin_try_code/datafile.csv\")\n\ncase class School(Type:String, State:String, Gender:String, Year_2001:Long, Year_2002:Long, Year_2003:Long, Year_2004:Long)\n\n// split each line, filter out header (starts with \"age\"), and map it into Bank case class  \nval scs \u003d schoolText.map(s\u003d\u003es.split(\";\")).filter(s\u003d\u003es(0)!\u003d\"\\\"Particulars\\\"\").map(\n    s\u003d\u003eSchool(s(0).replaceAll(\"\\\"\", \"\"), \n            s(1).replaceAll(\"\\\"\", \"\"),\n            s(2).replaceAll(\"\\\"\", \"\"),\n            s(9).replaceAll(\"\\\"\", \"\").toLong,\n            s(10).replaceAll(\"\\\"\", \"\").toLong,\n            s(11).replaceAll(\"\\\"\", \"\").toLong,\n            s(12).replaceAll(\"\\\"\", \"\").toLong\n        )\n)\n\n// convert to DataFrame and create temporal table\nscs.toDF().registerTempTable(\"schol\")",
+      "authenticationInfo": {},
+      "dateUpdated": "Mar 9, 2016 6:33:16 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1457502810587_-350489754",
+      "id": "20160309-112330_1866600103",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "schoolText: org.apache.spark.rdd.RDD[String] \u003d MapPartitionsRDD[38] at textFile at \u003cconsole\u003e:29\ndefined class School\nscs: org.apache.spark.rdd.RDD[School] \u003d MapPartitionsRDD[41] at map at \u003cconsole\u003e:35\n"
+      },
+      "dateCreated": "Mar 9, 2016 11:23:30 AM",
+      "dateStarted": "Mar 9, 2016 6:33:16 PM",
+      "dateFinished": "Mar 9, 2016 6:33:18 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql \nselect State from schol limit 2\n",
+      "authenticationInfo": {},
+      "dateUpdated": "Mar 9, 2016 6:34:56 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "col_name",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "data_type",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "col_name",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "data_type",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1457528194371_477537275",
+      "id": "20160309-182634_1954167386",
+      "result": {
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "java.lang.ArrayIndexOutOfBoundsException: 1\n\tat line336744523$38.$read$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$anonfun$3.apply(\u003cconsole\u003e:37)\n\tat line336744523$38.$read$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$iwC$$anonfun$3.apply(\u003cconsole\u003e:36)\n\tat scala.collection.Iterator$$anon$11.next(Iterator.scala:328)\n\tat scala.collection.Iterator$$anon$11.next(Iterator.scala:328)\n\tat scala.collection.Iterator$$anon$11.next(Iterator.scala:328)\n\tat scala.collection.Iterator$$anon$11.next(Iterator.scala:328)\n\tat scala.collection.Iterator$$anon$11.next(Iterator.scala:328)\n\tat scala.collection.Iterator$$anon$10.next(Iterator.scala:312)\n\tat scala.collection.Iterator$class.foreach(Iterator.scala:727)\n\tat scala.collection.AbstractIterator.foreach(Iterator.scala:1157)\n\tat scala.collection.generic.Growable$class.$plus$plus$eq(Growable.scala:48)\n\tat scala.collection.mutable.ArrayBuffer.$plus$plus$eq(ArrayBuffer.scala:103)\n\tat scala.collection.mutable.ArrayBuffer.$plus$plus$eq(ArrayBuffer.scala:47)\n\tat scala.collection.TraversableOnce$class.to(TraversableOnce.scala:273)\n\tat scala.collection.AbstractIterator.to(Iterator.scala:1157)\n\tat scala.collection.TraversableOnce$class.toBuffer(TraversableOnce.scala:265)\n\tat scala.collection.AbstractIterator.toBuffer(Iterator.scala:1157)\n\tat scala.collection.TraversableOnce$class.toArray(TraversableOnce.scala:252)\n\tat scala.collection.AbstractIterator.toArray(Iterator.scala:1157)\n\tat org.apache.spark.sql.execution.SparkPlan$$anonfun$5.apply(SparkPlan.scala:212)\n\tat org.apache.spark.sql.execution.SparkPlan$$anonfun$5.apply(SparkPlan.scala:212)\n\tat org.apache.spark.SparkContext$$anonfun$runJob$5.apply(SparkContext.scala:1858)\n\tat org.apache.spark.SparkContext$$anonfun$runJob$5.apply(SparkContext.scala:1858)\n\tat org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:66)\n\tat org.apache.spark.scheduler.Task.run(Task.scala:89)\n\tat org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:213)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)\n\tat java.lang.Thread.run(Thread.java:745)\n"
+      },
+      "dateCreated": "Mar 9, 2016 6:26:34 PM",
+      "dateStarted": "Mar 9, 2016 6:34:56 PM",
+      "dateFinished": "Mar 9, 2016 6:34:56 PM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1457528452411_-1149613440",
+      "id": "20160309-183052_1828767812",
+      "dateCreated": "Mar 9, 2016 6:30:52 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "note",
+  "id": "2BD9SC9ZR",
+  "owners": [],
+  "readers": [],
+  "writers": [],
+  "angularObjects": {
+    "2BCKXMM4W": [],
+    "2BE16XBQ1": [],
+    "2BE1Y96RZ": [],
+    "2BDQSK56G": [],
+    "2BF8D1B3Y": [],
+    "2BEW2ST2J": [],
+    "2BCKGM2CG": [],
+    "2BCMQS39X": [],
+    "2BEVXTNYF": [],
+    "2BEXS583D": [],
+    "2BDRUVFR6": [],
+    "2BF1K4GWB": [],
+    "2BDFBCU8M": [],
+    "2BDCAYUUA": [],
+    "2BCKW6BB4": [],
+    "2BFK29KP1": [],
+    "2BF11YNW3": []
+  },
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}

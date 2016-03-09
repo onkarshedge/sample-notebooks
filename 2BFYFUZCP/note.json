@@ -1,0 +1,198 @@
+{
+  "paragraphs": [
+    {
+      "text": "val schoolText \u003d sqlContext.read.json(\"/home/onkar/DRIVE(C)/zeppelin_try_code/data.json\")\nschoolText.printSchema()\nval data\u003dschoolText.select(\"data\")\ndata.printSchema()\nval p\u003ddata.collect()\nval d\u003dp.map(r \u003d\u003e r.getAs[Seq[Seq[String]]](0))",
+      "authenticationInfo": {},
+      "dateUpdated": "Mar 9, 2016 7:32:44 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 95.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1457421414740_-746767752",
+      "id": "20160308-124654_723780056",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "schoolText: org.apache.spark.sql.DataFrame \u003d [data: array\u003carray\u003cstring\u003e\u003e, fields: array\u003cstruct\u003cid:string,label:string,type:string\u003e\u003e]\nroot\n |-- data: array (nullable \u003d true)\n |    |-- element: array (containsNull \u003d true)\n |    |    |-- element: string (containsNull \u003d true)\n |-- fields: array (nullable \u003d true)\n |    |-- element: struct (containsNull \u003d true)\n |    |    |-- id: string (nullable \u003d true)\n |    |    |-- label: string (nullable \u003d true)\n |    |    |-- type: string (nullable \u003d true)\n\ndata: org.apache.spark.sql.DataFrame \u003d [data: array\u003carray\u003cstring\u003e\u003e]\nroot\n |-- data: array (nullable \u003d true)\n |    |-- element: array (containsNull \u003d true)\n |    |    |-- element: string (containsNull \u003d true)\n\np: Array[org.apache.spark.sql.Row] \u003d Array([WrappedArray(WrappedArray(Secondary School, India, Total, 30507215, 33214100, 35009349, 37075386, 36926188, 39938127, 44475476, 46310473, 48434226, 51195106), WrappedArray(Secondary School, India, Boy, NA, 19495593, 20612672, 21686880, 21277672, 22987548, 25156258, 25996670, 26798161, 28300738), WrappedArray(Secondary School, India, Girl, NA, 13718507, 14396677, 15388506, 15648516, 16950579, 19319218, 20313803, 21636065, 22894368), WrappedArray(Secondary School, Andaman and Nicobar Islands, Total, 16732, 17325, 18056, 18637, 19027, 20029, 20902, 21163, 21443, 22581), WrappedArray(Secondary School, Andaman and Nicobar Islands, Boy, NA, 8885, 9093, 9581, 9803, 10304, 10768, 10813, 10904, 11687), WrappedArray(Secondary School, Andaman and Nicobar...d: Array[Seq[Seq[String]]] \u003d Array(WrappedArray(WrappedArray(Secondary School, India, Total, 30507215, 33214100, 35009349, 37075386, 36926188, 39938127, 44475476, 46310473, 48434226, 51195106), WrappedArray(Secondary School, India, Boy, NA, 19495593, 20612672, 21686880, 21277672, 22987548, 25156258, 25996670, 26798161, 28300738), WrappedArray(Secondary School, India, Girl, NA, 13718507, 14396677, 15388506, 15648516, 16950579, 19319218, 20313803, 21636065, 22894368), WrappedArray(Secondary School, Andaman and Nicobar Islands, Total, 16732, 17325, 18056, 18637, 19027, 20029, 20902, 21163, 21443, 22581), WrappedArray(Secondary School, Andaman and Nicobar Islands, Boy, NA, 8885, 9093, 9581, 9803, 10304, 10768, 10813, 10904, 11687), WrappedArray(Secondary School, Andaman and Nicobar Islands,..."
+      },
+      "dateCreated": "Mar 8, 2016 12:46:54 PM",
+      "dateStarted": "Mar 9, 2016 7:32:44 PM",
+      "dateFinished": "Mar 9, 2016 7:32:45 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "case class School(Type:String, State:String, Gender:String, Year_2001:Long, Year_2002:Long, Year_2003:Long, Year_2004:Long)\nd(0).map(xs \u003d\u003e School(xs(0),xs(1),xs(2),xs(9).toLong,xs(10).toLong,xs(11).toLong,xs(12).toLong)).toDS().toDF().registerTempTable(\"India\")",
+      "authenticationInfo": {},
+      "dateUpdated": "Mar 9, 2016 7:32:48 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 193.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "data",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "data",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "tableHide": false,
+        "title": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1457424051977_-211596833",
+      "id": "20160308-133051_1931856069",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "defined class School\n"
+      },
+      "dateCreated": "Mar 8, 2016 1:30:51 PM",
+      "dateStarted": "Mar 9, 2016 7:32:48 PM",
+      "dateFinished": "Mar 9, 2016 7:32:49 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql \nselect State,Gender,Year_2001 from India where Type\u003d\"Secondary School\" and State like\"%Pradesh\"",
+      "authenticationInfo": {},
+      "dateUpdated": "Mar 9, 2016 7:32:26 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "multiBarChart",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "State",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "Year_2001",
+              "index": 2.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [
+            {
+              "name": "State",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            {
+              "name": "Gender",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "scatter": {
+            "xAxis": {
+              "name": "State",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "Gender",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1457444975889_1443917517",
+      "id": "20160308-191935_1792303046",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "State\tGender\tYear_2001\nAndhra Pradesh\tTotal\t3468713\nAndhra Pradesh\tBoy\t1877017\nAndhra Pradesh\tGirl\t1591696\nArunachal Pradesh\tTotal\t50396\nArunachal Pradesh\tBoy\t27789\nArunachal Pradesh\tGirl\t22607\nHimachal Pradesh\tTotal\t410591\nHimachal Pradesh\tBoy\t220159\nHimachal Pradesh\tGirl\t190432\nMadhya Pradesh\tTotal\t2881733\nMadhya Pradesh\tBoy\t1795793\nMadhya Pradesh\tGirl\t1085940\nUttar Pradesh\tTotal\t9334365\nUttar Pradesh\tBoy\t5462237\nUttar Pradesh\tGirl\t3872128\n"
+      },
+      "dateCreated": "Mar 8, 2016 7:19:35 PM",
+      "dateStarted": "Mar 9, 2016 7:30:01 PM",
+      "dateFinished": "Mar 9, 2016 7:30:01 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1457531308489_-315415481",
+      "id": "20160309-191828_715184321",
+      "dateCreated": "Mar 9, 2016 7:18:28 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Note2",
+  "id": "2BFYFUZCP",
+  "owners": [],
+  "readers": [],
+  "writers": [],
+  "angularObjects": {
+    "2BCKXMM4W": [],
+    "2BE16XBQ1": [],
+    "2BE1Y96RZ": [],
+    "2BF8D1B3Y": [],
+    "2BEW2ST2J": [],
+    "2BDQSK56G": [],
+    "2BCKGM2CG": [],
+    "2BG7RU9UG": [],
+    "2BEVXTNYF": [],
+    "2BEXS583D": [],
+    "2BDRUVFR6": [],
+    "2BF1K4GWB": [],
+    "2BDFBCU8M": [],
+    "2BCKW6BB4": [],
+    "2BDCAYUUA": [],
+    "2BFK29KP1": [],
+    "2BF11YNW3": []
+  },
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}
